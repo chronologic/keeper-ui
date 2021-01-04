@@ -1,12 +1,12 @@
-import React from 'react';
-import { Layout as AntLayout } from 'antd';
-import styled from 'styled-components';
+import React from "react";
+import { Layout as AntLayout } from "antd";
+import styled from "styled-components";
 
-import GlobalStyle from './GlobalStyle';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
-import Main from '../Main';
-import Footer from '../Footer';
+import GlobalStyle from "./GlobalStyle";
+import Header from "../Header";
+import Sidebar from "../Sidebar";
+import Main from "../Main";
+import Footer from "../Footer";
 
 const {
   Header: AntHeader,
@@ -19,15 +19,15 @@ function App() {
   return (
     <StyledApp>
       <GlobalStyle />
-      <AntLayout className='layout'>
+      <AntLayout className="layout">
         <AntHeader>
           <Header />
         </AntHeader>
-        <AntLayout className='layout-inner'>
-          <AntSider className='sider'>
-            <Sidebar className='sidebar' />
+        <AntLayout className="layout-inner">
+          <AntSider className="sider">
+            <Sidebar className="sidebar" />
           </AntSider>
-          <AntContent className='content'>
+          <AntContent className="content">
             <Main />
           </AntContent>
         </AntLayout>
