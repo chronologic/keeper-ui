@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout as AntLayout } from "antd";
 import styled from "styled-components";
+import "antd/dist/antd.css";
 
 import GlobalStyle from "./GlobalStyle";
 import Header from "../Header";
@@ -23,11 +24,11 @@ function App() {
         <AntHeader>
           <Header />
         </AntHeader>
-        <AntLayout className="layout-inner">
-          <AntSider className="sider">
-            <Sidebar className="sidebar" />
+        <AntLayout>
+          <AntSider>
+            <Sidebar />
           </AntSider>
-          <AntContent className="content">
+          <AntContent>
             <Main />
           </AntContent>
         </AntLayout>
@@ -41,34 +42,7 @@ function App() {
 
 const StyledApp = styled.div`
   .layout {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
-  }
-
-  .layout-inner {
-    display: flex;
-    flex-grow: 1;
-  }
-
-  .sider {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-
-    > .ant-layout-sider-children {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-  }
-
-  .sidebar {
-    flex-grow: 1;
-  }
-
-  .content {
-    flex-grow: 1;
   }
 `;
 

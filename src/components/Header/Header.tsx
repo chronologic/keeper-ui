@@ -6,8 +6,7 @@ function Header() {
 }
 
 const StyledHeader = styled.div`
-  background-color: gray;
-  padding: 24px;
+  color: white;
 `;
 
 export default Header;
