@@ -9,32 +9,17 @@ import Sidebar from "../Sidebar";
 import Main from "../Main";
 import Footer from "../Footer";
 
-const {
-  Header: AntHeader,
-  Footer: AntFooter,
-  Sider: AntSider,
-  Content: AntContent,
-} = AntLayout;
-
 function App() {
   return (
     <StyledApp>
       <GlobalStyle />
       <AntLayout className="layout">
-        <AntHeader>
-          <Header />
-        </AntHeader>
+        <Header />
         <AntLayout>
-          <AntSider>
-            <Sidebar />
-          </AntSider>
-          <AntContent>
-            <Main />
-          </AntContent>
+          <Sidebar />
+          <Main />
         </AntLayout>
-        <AntFooter>
-          <Footer />
-        </AntFooter>
+        <Footer />
       </AntLayout>
     </StyledApp>
   );

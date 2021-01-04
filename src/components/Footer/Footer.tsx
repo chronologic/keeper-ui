@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { Layout } from "antd";
 
 function Footer() {
-  return <StyledFooter>Footer</StyledFooter>;
+  return (
+    <Layout.Footer>
+      <StyledFooter>Footer</StyledFooter>
+    </Layout.Footer>
+  );
 }
 
-const StyledFooter = styled.div`
-  background-color: black;
-  color: white;
-  padding: 24px;
-`;
+const StyledFooter = styled.div``;
 
 export default Footer;

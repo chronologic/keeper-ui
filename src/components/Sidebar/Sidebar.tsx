@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Layout } from "antd";
 
 function Sidebar() {
-  return <StyledSidebar>Sidebar</StyledSidebar>;
+  return (
+    <Layout.Sider>
+      <StyledSidebar>Sidebar</StyledSidebar>
+    </Layout.Sider>
+  );
 }
 
 const StyledSidebar = styled.div`
