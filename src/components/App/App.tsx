@@ -3,6 +3,7 @@ import { Layout as AntLayout } from "antd";
 import styled from "styled-components";
 import "antd/dist/antd.css";
 
+import Providers from "./Providers";
 import GlobalStyle from "./GlobalStyle";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
@@ -11,17 +12,19 @@ import Footer from "../Footer";
 
 function App() {
   return (
-    <StyledApp>
-      <GlobalStyle />
-      <AntLayout className="layout">
-        <Header />
-        <AntLayout>
-          <Sidebar />
-          <Main />
+    <Providers>
+      <StyledApp>
+        <GlobalStyle />
+        <AntLayout className="layout">
+          <Header />
+          <AntLayout>
+            <Sidebar />
+            <Main />
+          </AntLayout>
+          <Footer />
         </AntLayout>
-        <Footer />
-      </AntLayout>
-    </StyledApp>
+      </StyledApp>
+    </Providers>
   );
 }
 
