@@ -35,7 +35,7 @@ const dataSource = [
     cost: "0.15 ETH",
   },
   {
-    key: "1",
+    key: "2",
     date: "1 day ago",
     contract: <a href="url">0xe7b40e97f3bb8355ae1c3a26a635d7b1af105594</a>,
     lot: "1 BTC",
@@ -71,7 +71,7 @@ const columns = [
     key: "state",
   },
   {
-    title: "Redempton cost",
+    title: "Redemption cost",
     dataIndex: "cost",
     key: "cost",
   },
