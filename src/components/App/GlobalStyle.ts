@@ -138,6 +138,9 @@ const Style = createGlobalStyle`
   a:hover {
     color: rgba(0,0,0,0.85);
   }
+  .darkgray-text {
+    color: #969ca5;
+  }
 `;
 
 export default Style;

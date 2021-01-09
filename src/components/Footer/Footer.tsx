@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import { Layout, Row, Col, Space, Typography } from "antd";
 import logo from "../../img/ChronoLogic.svg";
 
-const { Text, Link } = Typography;
+const { Link } = Typography;
 
 function Footer() {
   return (

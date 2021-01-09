@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import { Layout, Menu, Typography } from "antd";
+
 import home from "../../img/home.svg";
 import zendesk from "../../img/zendesk.svg";
 import discord from "../../img/discord.svg";
 
-const { Text, Link } = Typography;
+const { Link } = Typography;
 
 function Sidebar() {
   return (
@@ -41,9 +41,5 @@ function Sidebar() {
     </Layout.Sider>
   );
 }
-
-const StyledLink = styled.div`
-  color: rgba(0, 0, 0, 0.85);
-`;
 
 export default Sidebar;
