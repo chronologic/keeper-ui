@@ -4,6 +4,7 @@ import { Layout, Typography, Space } from "antd";
 
 import logo from "../../img/logo.svg";
 import FlexSpacer from "../FlexSpacer";
+import { darkgray } from "../colors";
 import ConnectionStatus from "./ConnectionStatus";
 import WalletConnector from "../WalletConnector";
 
@@ -16,7 +17,7 @@ function Header() {
         <Space>
           <img src={logo} alt="logo" />
           <ChronoLogic>
-            <Text className="darkgray-text">by ChronoLogic</Text>
+            <Text>by ChronoLogic</Text>
           </ChronoLogic>
         </Space>
         <FlexSpacer />
@@ -44,6 +45,9 @@ const ConnectWallet = styled.div`
 
 const ChronoLogic = styled.div`
   font-size: 0.9rem;
+  > * {
+    color: ${darkgray};
+  }
 `;
 
 export default Header;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Menu, Dropdown, Typography } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { Wallet } from "use-wallet";
+import { darkgray, turquoise } from "../colors";
 
 interface IProps {
   wallet: Wallet<unknown>;
@@ -27,9 +28,7 @@ function Connected({ wallet }: IProps) {
   return (
     <Dropdown trigger={["click"]} overlay={menu}>
       <Content>
-        <Text className="darkgray-text" title={wallet.account || ""}>
-          ADDRESS: {addressEllipsis}
-        </Text>
+        <Text title={wallet.account || ""}>ADDRESS: {addressEllipsis}</Text>
         <br />
         <Dot />
         <Text className="darkgray-text">Connected: {wallet.networkName}</Text>
@@ -41,9 +40,12 @@ function Connected({ wallet }: IProps) {
 const Content = styled.div`
   cursor: pointer;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
   line-height: 20px;
+
+  > * {
+    color: ${darkgray};
+  }
 `;
 
 const Dot = styled.span`
@@ -51,7 +53,7 @@ const Dot = styled.span`
   border-radius: 50%;
   width: 14px;
   height: 14px;
-  background-color: #48dbb4;
+  background-color: ${turquoise};
   margin-right: 4px;
   vertical-align: text-bottom;
 `;

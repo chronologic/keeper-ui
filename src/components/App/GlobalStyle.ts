@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import { black, purple, turquoise } from "../colors";
+
 const Style = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -22,7 +24,7 @@ const Style = createGlobalStyle`
     font-feature-settings: normal;
   }
   ::selection {
-    background: #48dbb4;
+    background: ${turquoise};
   }
   .ant-layout-header {
     height: 80px;
@@ -62,27 +64,28 @@ const Style = createGlobalStyle`
     padding: 1rem 2.25rem;
     font-size: 1.25rem!;
     line-height: 1.5rem;
-    background-color: #0a0806;
-    color: #48dbb4;
+    background-color: ${black};
+    border-color: ${black};
+    color: ${turquoise};
     letter-spacing: .05rem;
     text-transform: uppercase;
   }
   .ant-btn-primary:hover, .ant-btn-primary:focus {
     color: #fff;
-    background: #0a0806;
-    border-color: #0a0806;
+    background: ${black};
+    border-color: ${black};
   }
   .ant-btn-link {
     font-weight: 500;
-    color: #48dbb4;
+    color: ${turquoise};
     letter-spacing: .05rem;
     text-transform: uppercase;
   }
   .ant-btn-link:hover, .ant-btn-link:focus {
-    color: #0a0806;
+    color: ${black};
   }
   .ant-input:focus, .ant-input-focused, .ant-input:hover {
-    border-color: #48dbb4;
+    border-color: ${turquoise};
     box-shadow: none;
   }
   .ant-layout {
@@ -98,16 +101,16 @@ const Style = createGlobalStyle`
     background: white;
   }
   .ant-layout-footer {
-    background: #0A0806;
+    background: ${black};
   }
   .ant-progress-inner:not(.ant-progress-circle-gradient) 
   .ant-progress-circle-path {
-    stroke: #7850cd;
+    stroke: ${purple};
   }
   .ant-pagination-item-active, .ant-pagination-item-active a, .ant-pagination-item-active a:hover, 
   .ant-pagination-item-active:focus, .ant-pagination-item-active:hover {
-    border-color: #47dbb4;
-    color: #47dbb4;
+    border-color: ${turquoise};
+    color: ${turquoise};
   }
   .wallet-icon {
     max-width: 18px;
@@ -119,7 +122,7 @@ const Style = createGlobalStyle`
     margin: 0 8px;
   }
   .table-active {
-    color: #48dbb4;
+    color: ${turquoise};
     display: inline;
   }
   .footer-link {
@@ -127,19 +130,16 @@ const Style = createGlobalStyle`
     text-transform: uppercase;
   }
   .footer-link:focus, .footer-link:hover, .footer-link a:focus, .footer-link a:hover {
-    color: #7850cd !important;
+    color: ${purple} !important;
   }
   .menu-link {
     color: rgba(0,0,0,0.85) !important;
   }
   a {
-    color: #7850cd;
+    color: ${purple};
   }
   a:hover {
     color: rgba(0,0,0,0.85);
-  }
-  .darkgray-text {
-    color: #969ca5;
   }
 `;
 
