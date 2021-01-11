@@ -17,6 +17,7 @@ import shield from "../../img/shield.svg";
 import redeemed from "../../img/redeemed.svg";
 import active from "../../img/active.svg";
 import mail from "../../img/mail.svg";
+import { purple, turquoise } from "../colors";
 
 const { Title } = Typography;
 
@@ -157,7 +158,7 @@ const HeaderTitle = styled.div`
 `;
 
 const Balance = styled.div`
-  color: #7850cd;
+  color: ${purple};
   font-family: "Roboto Slab";
   font-weight: 700;
   font-size: 42px;
@@ -174,7 +175,7 @@ const StyledContent = styled.div`
 `;
 
 const LayoutHeader = styled.div`
-  background: #48dbb4;
+  background: ${turquoise};
   height: 250px;
 `;
 
