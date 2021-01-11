@@ -18,7 +18,7 @@ function ConnectionStatus() {
   }, [wallet.connector]);
 
   return (
-    <Space>
+    <Space direction="horizontal" size={[48, 0]}>
       {wallet.status === "connected" ? (
         <Tag icon={<CheckCircleOutlined />} color="success">
           Connected to {connector}

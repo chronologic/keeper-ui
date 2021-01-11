@@ -39,13 +39,10 @@ function Connected({ wallet }: IProps) {
 
 const Content = styled.div`
   cursor: pointer;
+  text-align: right;
   text-transform: uppercase;
   font-size: 14px;
   line-height: 20px;
-
-  > * {
-    color: ${darkgray};
-  }
 `;
 
 const Dot = styled.span`

@@ -17,6 +17,7 @@ import shield from "../../img/shield.svg";
 import redeemed from "../../img/redeemed.svg";
 import active from "../../img/active.svg";
 import mail from "../../img/mail.svg";
+import { purple, turquoise } from "../colors";
 
 const { Title } = Typography;
 
@@ -80,60 +81,64 @@ const columns = [
 function Dashboard() {
   return (
     <Layout>
-      <HeaderTitle>
-        <Title>Overview</Title>
-      </HeaderTitle>
-      <StyledContent>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col className="gutter-row" span={6}>
-            <Space direction="vertical" size={[24, 0]}>
-              <Title level={4}>ETH balance</Title>
-              <Balance>0.1391 ETH</Balance>
-              <div>You’re running out of ETH</div>
-              <Progress type="circle" percent={10} format={() => ""} />
-            </Space>
-          </Col>
-          <Col className="gutter-row" span={6}>
-            <Card>
+      <LayoutHeader>
+        <HeaderTitle>
+          <Title>Overview</Title>
+        </HeaderTitle>
+      </LayoutHeader>
+      <Main>
+        <StyledContent>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={6}>
               <Space direction="vertical" size={[24, 0]}>
-                <CircleIcon>
-                  <img src={eth} className="circle-icon" alt="eth" />
-                </CircleIcon>
-                <div>Provide Payment</div>
-                <Input placeholder="Min 1 ETH" />
-                <Button type="primary">Deposit</Button>
+                <Title level={4}>ETH balance</Title>
+                <Balance>0.1391 ETH</Balance>
+                <div>You’re running out of ETH</div>
+                <Progress type="circle" percent={10} format={() => ""} />
               </Space>
-            </Card>
-          </Col>
-          <Col className="gutter-row" span={6}>
-            <Card>
-              <Space direction="vertical" size={[24, 0]}>
-                <CircleIcon>
-                  <img src={shield} className="circle-icon" alt="shield" />
-                </CircleIcon>
-                <div>Operator Address</div>
-                <Input placeholder="ETH Address" />
-                <Button type="link">Submit</Button>
-              </Space>
-            </Card>
-          </Col>
-          <Col className="gutter-row" span={6}>
-            <Card>
-              <Space direction="vertical" size={[24, 0]}>
-                <CircleIcon>
-                  <img src={mail} className="circle-icon" alt="mail" />
-                </CircleIcon>
-                <div>Contact Email</div>
-                <Input placeholder="Email" />
-                <Button type="link">Submit</Button>
-              </Space>
-            </Card>
-          </Col>
-        </Row>
-      </StyledContent>
-      <StyledContent>
-        <Table dataSource={dataSource} columns={columns} />
-      </StyledContent>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Card>
+                <Space direction="vertical" size={[24, 0]}>
+                  <CircleIcon>
+                    <img src={eth} className="circle-icon" alt="eth" />
+                  </CircleIcon>
+                  <div>Provide Payment</div>
+                  <Input placeholder="Min 1 ETH" />
+                  <Button type="primary">Deposit</Button>
+                </Space>
+              </Card>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Card>
+                <Space direction="vertical" size={[24, 0]}>
+                  <CircleIcon>
+                    <img src={shield} className="circle-icon" alt="shield" />
+                  </CircleIcon>
+                  <div>Operator Address</div>
+                  <Input placeholder="ETH Address" />
+                  <Button type="link">Submit</Button>
+                </Space>
+              </Card>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <Card>
+                <Space direction="vertical" size={[24, 0]}>
+                  <CircleIcon>
+                    <img src={mail} className="circle-icon" alt="mail" />
+                  </CircleIcon>
+                  <div>Contact Email</div>
+                  <Input placeholder="Email" />
+                  <Button type="link">Submit</Button>
+                </Space>
+              </Card>
+            </Col>
+          </Row>
+        </StyledContent>
+        <StyledContent>
+          <Table dataSource={dataSource} columns={columns} />
+        </StyledContent>
+      </Main>
     </Layout>
   );
 }
@@ -153,7 +158,7 @@ const HeaderTitle = styled.div`
 `;
 
 const Balance = styled.div`
-  color: #7850cd;
+  color: ${purple};
   font-family: "Roboto Slab";
   font-weight: 700;
   font-size: 42px;
@@ -167,6 +172,15 @@ const StyledContent = styled.div`
   margin: 0 30px 30px;
   padding: 24px;
   box-shadow: 0 4px 4px hsla(0, 0%, 75%, 0.3);
+`;
+
+const LayoutHeader = styled.div`
+  background: ${turquoise};
+  height: 250px;
+`;
+
+const Main = styled.div`
+  margin-top: -150px;
 `;
 
 export default Dashboard;
