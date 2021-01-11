@@ -22,8 +22,10 @@ function Header() {
         </Space>
         <FlexSpacer />
         <ConnectWallet>
-          <ConnectionStatus />
-          <WalletConnector />
+          <Space size={[24, 0]}>
+            <ConnectionStatus />
+            <WalletConnector />
+          </Space>
         </ConnectWallet>
       </HeaderContent>
     </Layout.Header>

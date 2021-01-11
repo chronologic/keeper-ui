@@ -23,6 +23,13 @@ const Style = createGlobalStyle`
     line-height: 3rem;
     font-feature-settings: normal;
   }
+  h2.ant-typography, .ant-typography h2 {
+    font-size: 36px;
+  }
+  h3.ant-typography, .ant-typography h3 {
+    font-weight: 300;
+    font-size: 21px;
+  }
   ::selection {
     background: ${turquoise};
   }
@@ -44,7 +51,7 @@ const Style = createGlobalStyle`
     font-size: 1rem;
   }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    background-color: #E6E6E6;
+    background-color: ${turquoise};
   }
   .ant-menu-inline .ant-menu-item::after {
     border-right: none;
@@ -135,11 +142,20 @@ const Style = createGlobalStyle`
   .menu-link {
     color: rgba(0,0,0,0.85) !important;
   }
+  a.ant-typography, .ant-typography a {
+    color: ${purple};
+  }
+  a.ant-typography:focus, .ant-typography a:focus, 
+  a.ant-typography:hover, .ant-typography a:hover {
+    color: ${purple};
+    text-decoration: underline;
+  }
   a {
     color: ${purple};
   }
   a:hover {
-    color: rgba(0,0,0,0.85);
+    color: ${purple};
+    text-decoration: underline;
   }
 `;
 
