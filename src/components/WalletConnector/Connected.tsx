@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Menu, Dropdown, Typography } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import { Wallet } from "use-wallet";
-import { darkgray, turquoise } from "../colors";
+
+import { turquoise } from "../colors";
 
 interface IProps {
   wallet: Wallet<unknown>;

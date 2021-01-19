@@ -16,8 +16,8 @@ import eth from "../../img/eth.svg";
 import shield from "../../img/shield.svg";
 import redeemed from "../../img/redeemed.svg";
 import active from "../../img/active.svg";
-import mail from "../../img/mail.svg";
 import { purple, turquoise } from "../colors";
+import EmailCard from "./EmailCard";
 
 const { Title } = Typography;
 
@@ -122,16 +122,7 @@ function Dashboard() {
               </Card>
             </Col>
             <Col className="gutter-row" span={6}>
-              <Card>
-                <Space direction="vertical" size={[24, 0]}>
-                  <CircleIcon>
-                    <img src={mail} className="circle-icon" alt="mail" />
-                  </CircleIcon>
-                  <div>Contact Email</div>
-                  <Input placeholder="Email" />
-                  <Button type="link">Submit</Button>
-                </Space>
-              </Card>
+              <EmailCard />
             </Col>
           </Row>
         </StyledContent>
