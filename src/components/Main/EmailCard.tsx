@@ -9,16 +9,11 @@ const emailRegex = /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.
 
 function EmailCard() {
   const { user, loading, onUpdate } = useContext(UserContext);
-  const [inputValue, setInputValue] = useState(user.email);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    setInputValue(user.email);
-  }, [user.email]);
-
-  const handleInputChange = useCallback((e) => {
-    setInputValue(e.target.value);
-  }, []);
+    form.setFieldsValue({ email: user.email });
+  }, [form, user.email]);
 
   const handleSubmit = useCallback(async () => {
     const { email } = await form.validateFields();
@@ -45,12 +40,7 @@ function EmailCard() {
             },
           ]}
         >
-          <Input
-            placeholder="Email"
-            value={inputValue}
-            disabled={loading}
-            onChange={handleInputChange}
-          />
+          <Input placeholder="Email" disabled={loading} />
         </Form.Item>
         <Button
           type="link"

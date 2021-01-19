@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { useWallet } from "use-wallet";
+import { notification } from "antd";
 
 import { apiService } from "../../services";
 import { IUser } from "../../types";
@@ -50,6 +51,19 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
           userPartial
         );
         setUser(data);
+        notification.success({
+          message: "Success",
+          description: `${
+            userPartial.email ? "Email" : "Operator address"
+          } updated successfully`,
+        });
+      } catch (e) {
+        notification.error({
+          message: "Error",
+          description: "Update failed",
+        });
+        console.error(e);
+        throw e;
       } finally {
         setLoading(false);
       }
