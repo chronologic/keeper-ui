@@ -2,8 +2,8 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Input, Button, Form } from "antd";
 
 import mail from "../../img/mail.svg";
-import InputCard from "./InputCard";
 import { UserContext } from "../../contexts";
+import InputCard from "./InputCard";
 
 const emailRegex = /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,10}|[0-9]{1,3})(\]?)$/i;
 
