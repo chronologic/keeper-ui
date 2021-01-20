@@ -18,6 +18,7 @@ import redeemed from "../../img/redeemed.svg";
 import active from "../../img/active.svg";
 import { purple, turquoise } from "../colors";
 import EmailCard from "./EmailCard";
+import AddressCard from "./AddressCard";
 
 const { Title } = Typography;
 
@@ -110,16 +111,7 @@ function Dashboard() {
               </Card>
             </Col>
             <Col className="gutter-row" span={6}>
-              <Card>
-                <Space direction="vertical" size={[24, 0]}>
-                  <CircleIcon>
-                    <img src={shield} className="circle-icon" alt="shield" />
-                  </CircleIcon>
-                  <div>Operator Address</div>
-                  <Input placeholder="ETH Address" />
-                  <Button type="link">Submit</Button>
-                </Space>
-              </Card>
+              <AddressCard />
             </Col>
             <Col className="gutter-row" span={6}>
               <EmailCard />
