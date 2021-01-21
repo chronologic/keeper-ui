@@ -7,7 +7,7 @@ import InputCard from "./InputCard";
 
 const ethereumRegex = /^0x[a-fA-F0-9]{40}$/g;
 
-function AddressCard() {
+function OperatorAddressCard() {
   const { user, loading, onUpdate } = useContext(UserContext);
   const [form] = Form.useForm();
 
@@ -32,15 +32,15 @@ function AddressCard() {
           rules={[
             {
               required: true,
-              message: "Please provide your ETH Address",
+              message: "Please provide your Operator Address",
             },
             {
               pattern: ethereumRegex,
-              message: "Please provide valid ETH Address",
+              message: "Please provide valid Operator Address",
             },
           ]}
         >
-          <Input placeholder="ETH Address" disabled={loading} />
+          <Input placeholder="Operator Address" disabled={loading} />
         </Form.Item>
         <Button
           type="link"
@@ -55,4 +55,4 @@ function AddressCard() {
   );
 }
 
-export default AddressCard;
+export default OperatorAddressCard;

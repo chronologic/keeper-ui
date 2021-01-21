@@ -14,7 +14,6 @@
     "@types/styled-components": "^5.1.7",
     "antd": "^4.10.0",
     "axios": "^0.21.1",
-    "ethereum-regex": "^1.1.13",
     "ethers": "^5.0.26",
     "prettier": "^2.2.1",
     "react": "^17.0.1",

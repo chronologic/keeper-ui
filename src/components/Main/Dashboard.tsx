@@ -18,7 +18,7 @@ import redeemed from "../../img/redeemed.svg";
 import active from "../../img/active.svg";
 import { purple, turquoise } from "../colors";
 import EmailCard from "./EmailCard";
-import AddressCard from "./AddressCard";
+import OperatorAddressCard from "./OperatorAddressCard";
 
 const { Title } = Typography;
 
@@ -111,7 +111,7 @@ function Dashboard() {
               </Card>
             </Col>
             <Col className="gutter-row" span={6}>
-              <AddressCard />
+              <OperatorAddressCard />
             </Col>
             <Col className="gutter-row" span={6}>
               <EmailCard />
