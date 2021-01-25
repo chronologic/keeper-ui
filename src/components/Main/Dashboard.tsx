@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   Layout,
@@ -21,35 +21,6 @@ import OperatorAddressCard from "./OperatorAddressCard";
 import { useDepositList } from "../../hooks";
 
 const { Title } = Typography;
-
-// const dataSource = [
-//   {
-//     key: "1",
-//     date: "1 day ago",
-//     contract: <a href="url">0xe7b40e97f3bb8355ae1c3a26a635d7b1af105594</a>,
-//     lot: "1 BTC",
-//     state: (
-//       <div>
-//         <img src={redeemed} className="table-icon" alt="redeemed" />
-//         Redeemed by Keeper
-//       </div>
-//     ),
-//     cost: "0.15 ETH",
-//   },
-//   {
-//     key: "2",
-//     date: "1 day ago",
-//     contract: <a href="url">0xe7b40e97f3bb8355ae1c3a26a635d7b1af105594</a>,
-//     lot: "1 BTC",
-//     state: (
-//       <div>
-//         <img src={active} className="table-icon" alt="active" />
-//         <div className="table-active">Active</div>
-//       </div>
-//     ),
-//     cost: "",
-//   },
-// ];
 
 const columns = [
   {
@@ -80,12 +51,14 @@ const columns = [
 ];
 
 function Dashboard() {
-  const [pagination, setPagination] = useState({ pageSize: 10, total: 100 });
-  const { loading, data, onPaginationChange } = useDepositList(pagination);
+  const [pagination, setPagination] = useState({ pageSize: 20, current: 1 });
+  const { loading, datasource, onPaginationChange } = useDepositList(
+    pagination
+  );
 
   function handleTableChange(newPagination: any) {
     setPagination(newPagination);
-    onPaginationChange();
+    onPaginationChange(newPagination);
   }
 
   return (
@@ -129,7 +102,7 @@ function Dashboard() {
         <StyledContent>
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={datasource}
             pagination={pagination}
             loading={loading}
             onChange={handleTableChange}

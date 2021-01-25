@@ -1,35 +1,40 @@
 import { useState, useEffect, useCallback } from "react";
+import { apiService } from "../services";
 
-function useDepositList(pagination: any) {
-  const [data, setData] = useState([]);
+interface IPagination {
+  pageSize: number;
+  current: number;
+}
+
+function useDepositList(pagination: IPagination) {
+  const [datasource, setDatasource] = useState([]);
   const [loading, setLoading] = useState(false);
-  const onPaginationChange = useCallback(() => {}, []);
-
-  const fetchData = useCallback(async (params = {}) => {
-    console.log("params:", params);
-    setLoading(true);
-    const response = await fetch({
-      url: "http://localhost:3001/deposits",
-      method: "get",
-      data: {
-        results: 10,
-        ...params,
-      },
-      type: "json",
-    });
-    console.log("response:", response);
-    setLoading(false);
-    setData(response.results);
+  const onPaginationChange = useCallback(() => {
+    fetchData(pagination);
   }, []);
 
-  useEffect(() => {
-    fetchData({
-      results: pagination.pageSize,
-      page: pagination.current,
-    });
-  }, [pagination, fetchData]);
+  const fetchData = useCallback(
+    async (params: IPagination = { pageSize: 20, current: 1 }) => {
+      console.log("params:", params);
+      setLoading(true);
 
-  return { loading, data, onPaginationChange };
+      try {
+        const { data } = await apiService.get(
+          `/deposits?page=${params.current}&limit=${params.pageSize}`
+        );
+        setDatasource(data);
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    fetchData(pagination);
+  });
+
+  return { loading, datasource, onPaginationChange };
 }
 
 export default useDepositList;
