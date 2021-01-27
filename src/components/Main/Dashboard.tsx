@@ -19,42 +19,37 @@ import { purple, turquoise } from "../colors";
 import EmailCard from "./EmailCard";
 import OperatorAddressCard from "./OperatorAddressCard";
 import { useDepositList } from "../../hooks";
+import { bnToNumber } from "../../utils/bnToNumber";
 
 const { Title } = Typography;
 
 const columns = [
   {
     title: "Created",
-    dataIndex: "date",
-    key: "date",
+    dataIndex: "createdAt",
   },
   {
     title: "Contract",
-    dataIndex: "contract",
-    key: "contract",
+    dataIndex: "depositAddress",
   },
   {
     title: "Lot",
     dataIndex: "lot",
-    key: "lot",
   },
   {
     title: "State",
-    dataIndex: "state",
-    key: "state",
+    dataIndex: "status",
   },
   {
     title: "Redemption cost",
-    dataIndex: "cost",
-    key: "cost",
+    dataIndex: "redemptionCost",
+    render: (redemptionCost: any) => `${bnToNumber(redemptionCost)} ETH`,
   },
 ];
 
 function Dashboard() {
   const [pagination, setPagination] = useState({ pageSize: 20, current: 1 });
-  const { loading, datasource, onPaginationChange } = useDepositList(
-    pagination
-  );
+  const { loading, items, onPaginationChange } = useDepositList(pagination);
 
   function handleTableChange(newPagination: any) {
     setPagination(newPagination);
@@ -102,7 +97,7 @@ function Dashboard() {
         <StyledContent>
           <Table
             columns={columns}
-            dataSource={datasource}
+            dataSource={items}
             pagination={pagination}
             loading={loading}
             onChange={handleTableChange}
