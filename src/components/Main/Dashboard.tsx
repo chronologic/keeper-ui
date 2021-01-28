@@ -20,6 +20,8 @@ import EmailCard from "./EmailCard";
 import OperatorAddressCard from "./OperatorAddressCard";
 import { useDepositList } from "../../hooks";
 import { bnToNumber } from "../../utils/bnToNumber";
+import LastSeen from "./LastSeen";
+import EthAddressFormat from "./EthAddressFormat";
 
 const { Title } = Typography;
 
@@ -27,10 +29,12 @@ const columns = [
   {
     title: "Created",
     dataIndex: "createdAt",
+    render: (createdAt: any) => `${LastSeen(createdAt)}`,
   },
   {
     title: "Contract",
     dataIndex: "depositAddress",
+    render: (depositAddress: any) => `${EthAddressFormat(depositAddress)}`,
   },
   {
     title: "Lot",
