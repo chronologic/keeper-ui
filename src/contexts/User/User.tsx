@@ -1,9 +1,15 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
-import { useWallet } from "use-wallet";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { notification } from "antd";
 
 import { apiService } from "../../services";
 import { IUser } from "../../types";
+import { EthersContext } from "../Ethers";
 
 type UserPartial = Partial<Pick<IUser, "email" | "operatorAddress">>;
 
@@ -24,7 +30,7 @@ export const UserContext = createContext<IUserContext>({
 });
 
 const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
-  const wallet = useWallet();
+  const { provider } = useContext(EthersContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>({} as IUser);
 
@@ -32,22 +38,24 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
     setLoading(true);
 
     try {
+      const address = await provider?.getSigner().getAddress();
       const { data } = await apiService.post<IUser>("/users", {
-        address: wallet.account!,
+        address,
       });
       setUser(data);
     } finally {
       setLoading(false);
     }
-  }, [wallet.account]);
+  }, [provider]);
 
   const updateUser = useCallback(
     async (userPartial: UserPartial) => {
       setLoading(true);
 
       try {
+        const address = await provider?.getSigner().getAddress();
         const { data } = await apiService.patch<IUser>(
-          `/users/${wallet.account}`,
+          `/users/${address}`,
           userPartial
         );
         setUser(data);
@@ -68,14 +76,14 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
         setLoading(false);
       }
     },
-    [wallet.account]
+    [provider]
   );
 
   useEffect(() => {
-    if (wallet.status === "connected") {
+    if (provider) {
       loadUser();
     }
-  }, [loadUser, wallet.status]);
+  }, [loadUser, provider]);
 
   return (
     <UserContext.Provider value={{ loading, user, onUpdate: updateUser }}>
