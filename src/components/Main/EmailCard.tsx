@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { Input, Button, Form } from "antd";
 
 import mail from "../../img/mail.svg";
@@ -12,8 +12,8 @@ function EmailCard() {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue({ email: user.email });
-  }, [form, user.email]);
+    form.setFieldsValue({ email: user?.email });
+  }, [form, user]);
 
   const handleSubmit = useCallback(async () => {
     const { email } = await form.validateFields();

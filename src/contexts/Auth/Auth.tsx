@@ -5,9 +5,13 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Modal } from "antd";
+import { Modal, notification } from "antd";
+import styled from "styled-components";
+import { AxiosError } from "axios";
+
 import { EthersContext } from "../Ethers";
 import { apiService } from "../../services";
+import { purple } from "../../components/colors";
 
 interface IAuthContext {
   authenticated: boolean;
@@ -46,12 +50,18 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
 
   const handleSign = useCallback(async () => {
     const signer = provider!.getSigner();
-    const signature = await signer.signMessage("keeper");
-    const account = await signer.getAddress();
+    try {
+      const signature = await signer.signMessage("keeper");
+      const account = await signer.getAddress();
 
-    setAuthHeader(account, signature);
-    setAuthenticated(true);
-    setAuthModalOpen(false);
+      setAuthHeader(account, signature);
+      setAuthenticated(true);
+      setAuthModalOpen(false);
+      notification.success({ message: "Signature successful" });
+    } catch (e) {
+      console.error(e);
+      notification.error({ message: "Signature failed" });
+    }
   }, [provider]);
 
   const handleCloseModal = useCallback(() => setAuthModalOpen(false), []);
@@ -63,14 +73,18 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
   }, [initAuth, provider]);
 
   useEffect(() => {
-    const interceptorId = apiService.interceptors.response.use((res) => {
-      if (res.status === 401) {
-        removeAuthHeader();
-        setAuthenticated(true);
-        setAuthModalOpen(true);
+    const interceptorId = apiService.interceptors.response.use(
+      undefined,
+      (res: AxiosError) => {
+        if (res?.response?.status === 401) {
+          console.warn("User unauthorized");
+          removeAuthHeader();
+          setAuthenticated(true);
+          setAuthModalOpen(true);
+        }
+        return res;
       }
-      return res;
-    });
+    );
 
     return () => apiService.interceptors.response.eject(interceptorId);
   }, []);
@@ -82,14 +96,22 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
         visible={authModalOpen}
         onOk={handleSign}
         onCancel={handleCloseModal}
+        maskClosable={false}
       >
         Please sign the following message to prove ownership of your wallet:
-        keeper
+        <br />
+        <br />
+        <MessageToSign>&quot;keeper&quot;</MessageToSign>
       </Modal>
       {children}
     </AuthContext.Provider>
   );
 };
+
+const MessageToSign = styled.div`
+  font-size: 24px;
+  color: ${purple};
+`;
 
 const authStorageKey = "auth";
 export function getAuthHeader(): string {

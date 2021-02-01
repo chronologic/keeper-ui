@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { Input, Button, Form } from "antd";
 
 import shield from "../../img/shield.svg";
@@ -12,8 +12,8 @@ function OperatorAddressCard() {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue({ operatorAddress: user.operatorAddress });
-  }, [form, user.operatorAddress]);
+    form.setFieldsValue({ operatorAddress: user?.operatorAddress });
+  }, [form, user]);
 
   const handleSubmit = useCallback(async () => {
     const { operatorAddress } = await form.validateFields();

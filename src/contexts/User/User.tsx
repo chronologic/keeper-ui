@@ -10,11 +10,12 @@ import { notification } from "antd";
 import { apiService } from "../../services";
 import { IUser } from "../../types";
 import { EthersContext } from "../Ethers";
+import { AuthContext } from "../Auth";
 
 type UserPartial = Partial<Pick<IUser, "email" | "operatorAddress">>;
 
 interface IUserContext {
-  user: IUser;
+  user: IUser | null;
   loading: boolean;
   onUpdate: (user: UserPartial) => void;
 }
@@ -24,12 +25,13 @@ interface IProps {
 }
 
 export const UserContext = createContext<IUserContext>({
-  user: {} as IUser,
+  user: null,
   loading: false,
   onUpdate: () => {},
 });
 
 const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
+  const { authenticated } = useContext(AuthContext);
   const { provider } = useContext(EthersContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>({} as IUser);
@@ -39,6 +41,7 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
 
     try {
       const address = await provider?.getSigner().getAddress();
+      console.log("fetching user...");
       const { data } = await apiService.post<IUser>("/users", {
         address,
       });
@@ -80,10 +83,10 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
   );
 
   useEffect(() => {
-    if (provider) {
+    if (authenticated && provider) {
       loadUser();
     }
-  }, [loadUser, provider]);
+  }, [authenticated, loadUser, provider]);
 
   return (
     <UserContext.Provider value={{ loading, user, onUpdate: updateUser }}>
