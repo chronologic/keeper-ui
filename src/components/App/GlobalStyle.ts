@@ -49,7 +49,7 @@ const Style = createGlobalStyle`
   }
   .ant-input-number {
     padding: 8px 12px;
-    width: auto;
+    width: 100%;
   }
   .ant-card {
     font-size: 1rem;

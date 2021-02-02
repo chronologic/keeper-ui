@@ -9,7 +9,8 @@ import { EthersContext } from "../../contexts";
 import { numberToBn } from "../../utils";
 import InputCard from "./InputCard";
 
-console.log(Number(MIN_BALANCE_ETH));
+// arbitrary minimum amount to put in
+const minPaymentAmount = Number(MIN_BALANCE_ETH) * 2;
 
 function PaymentCard() {
   const { provider } = useContext(EthersContext);
@@ -45,7 +46,7 @@ function PaymentCard() {
     const { ethAmount } = await form.validateFields();
     try {
       const ethForwarderContract = new ethers.Contract(
-        (EthForwarder.networks as any)[`${CHAIN_ID}`].address,
+        (EthForwarder.networks as any)[`${CHAIN_ID}`]?.address,
         EthForwarder.abi,
         provider?.getSigner()
       );
@@ -80,14 +81,13 @@ function PaymentCard() {
             },
             {
               type: "number",
-              min: Number(MIN_BALANCE_ETH),
-              message: `Minimum amount is ${MIN_BALANCE_ETH}`,
+              min: Number(minPaymentAmount),
+              message: `Minimum amount is ${minPaymentAmount}`,
             },
           ]}
         >
           <InputNumber
-            // min={Number(MIN_BALANCE_ETH)}
-            placeholder={`Min ${MIN_BALANCE_ETH} ETH`}
+            placeholder={`Min ${minPaymentAmount} ETH`}
             disabled={loading}
           />
         </Form.Item>

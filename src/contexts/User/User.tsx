@@ -41,7 +41,6 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
 
     try {
       const address = await provider?.getSigner().getAddress();
-      console.log("fetching user...");
       const { data } = await apiService.post<IUser>("/users", {
         address,
       });
