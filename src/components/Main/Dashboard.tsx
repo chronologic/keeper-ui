@@ -1,74 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Layout, Typography, Row, Col, Table } from "antd";
-import redeemed from "../../img/redeemed.svg";
-import active from "../../img/active.svg";
 import { turquoise } from "../colors";
 import EmailCard from "./EmailCard";
 import PaymentCard from "./PaymentCard";
 import OperatorAddressCard from "./OperatorAddressCard";
+import { useDepositList } from "../../hooks";
+import { bnToNumber } from "../../utils/bnToNumber";
+import LastSeen from "./LastSeen";
+import FormatAddress from "./FormatAddress";
+import FormatStatus from "./FormatStatus";
+import LotSize from "./LotSize";
 import UserBalance from "./UserBalance";
 
 const { Title } = Typography;
 
-const dataSource = [
-  {
-    key: "1",
-    date: "1 day ago",
-    contract: <a href="url">0xe7b40e97f3bb8355ae1c3a26a635d7b1af105594</a>,
-    lot: "1 BTC",
-    state: (
-      <div>
-        <img src={redeemed} className="table-icon" alt="redeemed" />
-        Redeemed by Keeper
-      </div>
-    ),
-    cost: "0.15 ETH",
-  },
-  {
-    key: "2",
-    date: "1 day ago",
-    contract: <a href="url">0xe7b40e97f3bb8355ae1c3a26a635d7b1af105594</a>,
-    lot: "1 BTC",
-    state: (
-      <div>
-        <img src={active} className="table-icon" alt="active" />
-        <div className="table-active">Active</div>
-      </div>
-    ),
-    cost: "",
-  },
-];
-
 const columns = [
   {
     title: "Created",
-    dataIndex: "date",
-    key: "date",
+    dataIndex: "createdAt",
+    render: (createdAt: string) => LastSeen({ date: createdAt }),
   },
   {
     title: "Contract",
-    dataIndex: "contract",
-    key: "contract",
+    dataIndex: "depositAddress",
+    render: (depositAddress: string) =>
+      FormatAddress({ address: depositAddress }),
   },
   {
-    title: "Lot",
-    dataIndex: "lot",
-    key: "lot",
+    title: "Lot size",
+    dataIndex: "lotSize",
+    render: (lot: number) => LotSize({ lot }),
   },
   {
-    title: "State",
-    dataIndex: "state",
-    key: "state",
+    title: "Status",
+    dataIndex: "status",
+    render: (status: string) => FormatStatus({ status }),
   },
   {
     title: "Redemption cost",
-    dataIndex: "cost",
-    key: "cost",
+    dataIndex: "redemptionCost",
+    render: (redemptionCost: string) =>
+      redemptionCost ? `${bnToNumber(redemptionCost)} ETH` : "",
   },
 ];
 
 function Dashboard() {
+  const [pagination, setPagination] = useState({
+    pageSize: 20,
+    current: 1,
+    total: 200,
+  });
+  const { loading, items, onPaginationChange } = useDepositList(pagination);
+
+  function handleTableChange(newPagination: any) {
+    setPagination(newPagination);
+    onPaginationChange(newPagination);
+  }
+
   return (
     <Layout>
       <LayoutHeader>
@@ -94,7 +83,13 @@ function Dashboard() {
           </Row>
         </StyledContent>
         <StyledContent>
-          <Table dataSource={dataSource} columns={columns} />
+          <Table
+            columns={columns}
+            dataSource={items}
+            pagination={pagination}
+            loading={loading}
+            onChange={handleTableChange}
+          />
         </StyledContent>
       </Main>
     </Layout>
