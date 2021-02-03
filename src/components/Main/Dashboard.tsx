@@ -30,8 +30,8 @@ const columns = [
   },
   {
     title: "Lot size",
-    dataIndex: "lotSize",
-    render: (lot: number) => LotSize({ lot }),
+    dataIndex: "lotSizeSatoshis",
+    render: (lotSizeSatoshis: string) => LotSize({ lotSizeSatoshis }),
   },
   {
     title: "Status",
