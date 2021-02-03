@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Layout, Typography, Row, Col, Table } from "antd";
 import { turquoise } from "../colors";
@@ -12,6 +12,7 @@ import FormatAddress from "./FormatAddress";
 import FormatStatus from "./FormatStatus";
 import LotSize from "./LotSize";
 import UserBalance from "./UserBalance";
+import { IPagination } from "../../hooks/useDepositList";
 
 const { Title } = Typography;
 
@@ -46,15 +47,13 @@ const columns = [
 ];
 
 function Dashboard() {
-  const [pagination, setPagination] = useState({
-    pageSize: 20,
+  const { loading, items, pagination, onPaginationChange } = useDepositList({
     current: 1,
-    total: 200,
+    pageSize: 20,
+    total: 0,
   });
-  const { loading, items, onPaginationChange } = useDepositList(pagination);
 
-  function handleTableChange(newPagination: any) {
-    setPagination(newPagination);
+  function handleTableChange(newPagination: IPagination) {
     onPaginationChange(newPagination);
   }
 
@@ -88,7 +87,7 @@ function Dashboard() {
             dataSource={items}
             pagination={pagination}
             loading={loading}
-            onChange={handleTableChange}
+            onChange={handleTableChange as any}
           />
         </StyledContent>
       </Main>

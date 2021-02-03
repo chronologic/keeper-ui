@@ -1,43 +1,65 @@
 import { useState, useEffect, useCallback } from "react";
+
 import { apiService } from "../services";
 
-interface IPagination {
+export interface IPagination {
   pageSize: number;
   current: number;
+  total: number;
 }
 
-function useDepositList(pagination: IPagination) {
-  const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
+type RequestParams = Pick<IPagination, "current" | "pageSize">;
+
+interface IResponse {
+  items: any[];
+  total: number;
+}
+
+function useDepositList(defaultPagination: IPagination) {
+  const [items, setItems] = useState([] as any[]);
+  const [pageSize, setPageSize] = useState(defaultPagination.pageSize);
+  const [current, setCurrent] = useState(defaultPagination.current);
+  const [total, setTotal] = useState(defaultPagination.total);
   const [loading, setLoading] = useState(false);
-  const fetchData = useCallback(
-    async (params: IPagination = { pageSize: 20, current: 1 }) => {
-      setLoading(true);
-      try {
-        const { data } = await apiService.get(
-          `/deposits?page=${params.current}&limit=${params.pageSize}`
-        );
-        setItems(data.items);
-        setTotal(data.total);
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+
+  const fetchData = useCallback(async (params: RequestParams) => {
+    setLoading(true);
+    try {
+      const { data } = await apiService.get<IResponse>(
+        `/deposits?page=${params.current}&limit=${params.pageSize}`
+      );
+      setItems(data.items);
+      setTotal(data.total);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const onPaginationChange = useCallback(
-    async (params: IPagination) => {
-      fetchData(params);
+    async (newPagination: IPagination) => {
+      setPageSize(newPagination.pageSize);
+      setCurrent(newPagination.current);
+      fetchData(newPagination);
     },
     [fetchData]
   );
 
   useEffect(() => {
-    fetchData(pagination);
-  }, [fetchData, pagination]);
+    fetchData(defaultPagination);
+    // ignore defaultPagination changes - we only want to use this once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchData]);
 
-  return { loading, items, total, onPaginationChange };
+  return {
+    loading,
+    items,
+    onPaginationChange,
+    pagination: {
+      current,
+      pageSize,
+      total,
+    } as IPagination,
+  };
 }
 
 export default useDepositList;
