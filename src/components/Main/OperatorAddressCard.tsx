@@ -27,7 +27,7 @@ function OperatorAddressCard() {
     >
       <Form form={form} name="addressForm">
         <Form.Item
-          name="address"
+          name="operatorAddress"
           label=""
           rules={[
             {
