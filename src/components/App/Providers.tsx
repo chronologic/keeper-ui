@@ -1,7 +1,7 @@
 import React from "react";
 import { UseWalletProvider } from "use-wallet";
 
-import { UserProvider } from "../../contexts";
+import { AuthProvider, UserProvider, EthersProvider } from "../../contexts";
 import { CHAIN_ID } from "../../env";
 
 interface IProps {
@@ -10,7 +10,11 @@ interface IProps {
 
 const Providers = ({ children }: IProps) => (
   <UseWalletProvider chainId={CHAIN_ID}>
-    <UserProvider>{children}</UserProvider>
+    <EthersProvider>
+      <AuthProvider>
+        <UserProvider>{children}</UserProvider>
+      </AuthProvider>
+    </EthersProvider>
   </UseWalletProvider>
 );
 

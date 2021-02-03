@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "ethers": "^5.0.26",
     "javascript-time-ago": "^2.3.4",
+    "keeper-payment-contract": "github:chronologic/keeper-payment-contract#v1.0.0-rc.1",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

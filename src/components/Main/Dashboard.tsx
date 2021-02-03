@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  Layout,
-  Typography,
-  Row,
-  Col,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Table,
-} from "antd";
-import eth from "../../img/eth.svg";
-import { purple, turquoise } from "../colors";
+import { Layout, Typography, Row, Col, Table } from "antd";
+import { turquoise } from "../colors";
 import EmailCard from "./EmailCard";
+import PaymentCard from "./PaymentCard";
 import OperatorAddressCard from "./OperatorAddressCard";
 import { useDepositList } from "../../hooks";
 import { bnToNumber } from "../../utils/bnToNumber";
@@ -22,6 +11,7 @@ import LastSeen from "./LastSeen";
 import FormatAddress from "./FormatAddress";
 import FormatStatus from "./FormatStatus";
 import LotSize from "./LotSize";
+import UserBalance from "./UserBalance";
 
 const { Title } = Typography;
 
@@ -79,24 +69,10 @@ function Dashboard() {
         <StyledContent>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
-              <Space direction="vertical" size={[24, 0]}>
-                <Title level={4}>ETH balance</Title>
-                <Balance>0.1391 ETH</Balance>
-                <div>You’re running out of ETH</div>
-                <Progress type="circle" percent={10} format={() => ""} />
-              </Space>
+              <UserBalance />
             </Col>
             <Col className="gutter-row" span={6}>
-              <Card>
-                <Space direction="vertical" size={[24, 0]}>
-                  <CircleIcon>
-                    <img src={eth} className="circle-icon" alt="eth" />
-                  </CircleIcon>
-                  <div>Provide Payment</div>
-                  <Input placeholder="Min 1 ETH" />
-                  <Button type="primary">Deposit</Button>
-                </Space>
-              </Card>
+              <PaymentCard />
             </Col>
             <Col className="gutter-row" span={6}>
               <OperatorAddressCard />
@@ -120,27 +96,8 @@ function Dashboard() {
   );
 }
 
-const CircleIcon = styled.div`
-  background: #d7f6ee;
-  border-radius: 50%;
-  display: table;
-  margin: 0 auto;
-  height: 60px;
-  width: 60px;
-  line-height: 60px;
-`;
-
 const HeaderTitle = styled.div`
   margin: 1rem 2rem 0;
-`;
-
-const Balance = styled.div`
-  color: ${purple};
-  font-family: "Roboto Slab";
-  font-weight: 700;
-  font-size: 42px;
-  line-height: 1.35;
-  font-feature-settings: "tnum" on, "lnum" on, "zero" on;
 `;
 
 const StyledContent = styled.div`

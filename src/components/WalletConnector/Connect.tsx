@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { Wallet } from "use-wallet";
-import { darkgray } from "../colors";
 
 import metamask from "../../img/metamask.svg";
 import trezor from "../../img/trezor.svg";

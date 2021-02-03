@@ -47,6 +47,10 @@ const Style = createGlobalStyle`
   .ant-input {
     padding: 12px 12px;
   }
+  .ant-input-number {
+    padding: 8px 12px;
+    width: 100%;
+  }
   .ant-card {
     font-size: 1rem;
   }
@@ -91,7 +95,8 @@ const Style = createGlobalStyle`
   .ant-btn-link:hover, .ant-btn-link:focus {
     color: ${black};
   }
-  .ant-input:focus, .ant-input-focused, .ant-input:hover {
+  .ant-input:focus, .ant-input-focused, .ant-input:hover,
+  .ant-input-number:focus, .ant-input-number-focused, .ant-input-number:hover {
     border-color: ${turquoise};
     box-shadow: none;
   }
