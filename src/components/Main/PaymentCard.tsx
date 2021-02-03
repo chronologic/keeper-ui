@@ -70,7 +70,7 @@ function PaymentCard() {
       icon={<img src={mail} className="circle-icon" alt="mail" />}
       title="Provide payment"
     >
-      <Form form={form} name="emailForm">
+      <Form form={form} name="paymentForm">
         <Form.Item
           name="ethAmount"
           label=""
