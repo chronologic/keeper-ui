@@ -10,13 +10,21 @@ export interface IPagination {
 
 type RequestParams = Pick<IPagination, "current" | "pageSize">;
 
+interface IDeposit {
+  depositAddress: string;
+  lotSizeSatoshis: string;
+  status: string;
+  redemptionCost: string;
+  createdAt: string;
+}
+
 interface IResponse {
-  items: any[];
+  items: IDeposit[];
   total: number;
 }
 
 function useDepositList(defaultPagination: IPagination) {
-  const [items, setItems] = useState([] as any[]);
+  const [items, setItems] = useState([] as IDeposit[]);
   const [pageSize, setPageSize] = useState(defaultPagination.pageSize);
   const [current, setCurrent] = useState(defaultPagination.current);
   const [total, setTotal] = useState(defaultPagination.total);

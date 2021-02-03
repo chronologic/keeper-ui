@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Layout, Typography, Row, Col, Table } from "antd";
+import { TablePaginationConfig } from "antd/lib/table";
+
 import { turquoise } from "../colors";
 import EmailCard from "./EmailCard";
 import PaymentCard from "./PaymentCard";
@@ -49,13 +51,22 @@ const columns = [
 function Dashboard() {
   const { loading, items, pagination, onPaginationChange } = useDepositList({
     current: 1,
-    pageSize: 20,
+    pageSize: 10,
     total: 0,
   });
 
   function handleTableChange(newPagination: IPagination) {
     onPaginationChange(newPagination);
   }
+
+  const paginationConfig: TablePaginationConfig = useMemo(
+    () => ({
+      ...pagination,
+      pageSizeOptions: ["10", "25", "50", "100"],
+      showSizeChanger: true,
+    }),
+    [pagination]
+  );
 
   return (
     <Layout>
@@ -83,9 +94,10 @@ function Dashboard() {
         </StyledContent>
         <StyledContent>
           <Table
+            rowKey="depositAddress"
             columns={columns}
             dataSource={items}
-            pagination={pagination}
+            pagination={paginationConfig}
             loading={loading}
             onChange={handleTableChange as any}
           />
