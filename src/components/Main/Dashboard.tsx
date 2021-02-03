@@ -13,15 +13,15 @@ import {
   Table,
 } from "antd";
 import eth from "../../img/eth.svg";
-import redeemed from "../../img/redeemed.svg";
-import active from "../../img/active.svg";
 import { purple, turquoise } from "../colors";
 import EmailCard from "./EmailCard";
 import OperatorAddressCard from "./OperatorAddressCard";
 import { useDepositList } from "../../hooks";
 import { bnToNumber } from "../../utils/bnToNumber";
 import LastSeen from "./LastSeen";
-import EthAddressFormat from "./EthAddressFormat";
+import FormatAddress from "./FormatAddress";
+import FormatStatus from "./FormatStatus";
+import LotSize from "./LotSize";
 
 const { Title } = Typography;
 
@@ -29,30 +29,38 @@ const columns = [
   {
     title: "Created",
     dataIndex: "createdAt",
-    render: (createdAt: any) => `${LastSeen(createdAt)}`,
+    render: (createdAt: string) => LastSeen({ date: createdAt }),
   },
   {
     title: "Contract",
     dataIndex: "depositAddress",
-    render: (depositAddress: any) => `${EthAddressFormat(depositAddress)}`,
+    render: (depositAddress: string) =>
+      FormatAddress({ address: depositAddress }),
   },
   {
-    title: "Lot",
-    dataIndex: "lot",
+    title: "Lot size",
+    dataIndex: "lotSize",
+    render: (lot: number) => LotSize({ lot }),
   },
   {
-    title: "State",
+    title: "Status",
     dataIndex: "status",
+    render: (status: string) => FormatStatus({ status }),
   },
   {
     title: "Redemption cost",
     dataIndex: "redemptionCost",
-    render: (redemptionCost: any) => `${bnToNumber(redemptionCost)} ETH`,
+    render: (redemptionCost: string) =>
+      redemptionCost ? `${bnToNumber(redemptionCost)} ETH` : "",
   },
 ];
 
 function Dashboard() {
-  const [pagination, setPagination] = useState({ pageSize: 20, current: 1 });
+  const [pagination, setPagination] = useState({
+    pageSize: 20,
+    current: 1,
+    total: 200,
+  });
   const { loading, items, onPaginationChange } = useDepositList(pagination);
 
   function handleTableChange(newPagination: any) {

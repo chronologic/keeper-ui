@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { black, purple, turquoise } from "../colors";
+import { black, darkgray, purple, turquoise } from "../colors";
 
 const Style = createGlobalStyle`
   * {
@@ -114,10 +114,38 @@ const Style = createGlobalStyle`
   .ant-progress-circle-path {
     stroke: ${purple};
   }
-  .ant-pagination-item-active, .ant-pagination-item-active a, .ant-pagination-item-active a:hover, 
+  .ant-pagination-jump-prev .ant-pagination-item-container 
+  .ant-pagination-item-link-icon, .ant-pagination-jump-next 
+  .ant-pagination-item-container .ant-pagination-item-link-icon {
+    color: ${turquoise};
+  }
+  .ant-pagination-prev:focus .ant-pagination-item-link, 
+  .ant-pagination-next:focus .ant-pagination-item-link, 
+  .ant-pagination-prev:hover .ant-pagination-item-link, 
+  .ant-pagination-next:hover .ant-pagination-item-link {
+    color: ${turquoise};
+    border-color: ${turquoise};
+  }
+  .ant-pagination-item:focus, .ant-pagination-item:hover {
+    border-color: ${turquoise};
+  }
+  .ant-pagination-item:focus a, .ant-pagination-item:hover a {
+    color: ${turquoise};
+  }
+  .ant-pagination-item-active, .ant-pagination-item-active a, 
+  .ant-pagination-item-active a:hover, 
   .ant-pagination-item-active:focus, .ant-pagination-item-active:hover {
     border-color: ${turquoise};
     color: ${turquoise};
+  }
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: ${turquoise};
+  }
+  .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border-color: ${turquoise};
+  }
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: #F6F6F6;
   }
   .wallet-icon {
     max-width: 18px;
