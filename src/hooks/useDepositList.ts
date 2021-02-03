@@ -2,13 +2,14 @@ import { useState, useEffect, useCallback } from "react";
 
 import { apiService } from "../services";
 
-export interface IPagination {
-  pageSize: number;
-  current: number;
+export interface IPagination extends IRequestParams {
   total: number;
 }
 
-type RequestParams = Pick<IPagination, "current" | "pageSize">;
+interface IRequestParams {
+  pageSize: number;
+  current: number;
+}
 
 interface IDeposit {
   depositAddress: string;
@@ -23,14 +24,14 @@ interface IResponse {
   total: number;
 }
 
-function useDepositList(defaultPagination: IPagination) {
+function useDepositList(defaultParams: IRequestParams) {
   const [items, setItems] = useState([] as IDeposit[]);
-  const [pageSize, setPageSize] = useState(defaultPagination.pageSize);
-  const [current, setCurrent] = useState(defaultPagination.current);
-  const [total, setTotal] = useState(defaultPagination.total);
+  const [pageSize, setPageSize] = useState(defaultParams.pageSize);
+  const [current, setCurrent] = useState(defaultParams.current);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = useCallback(async (params: RequestParams) => {
+  const fetchData = useCallback(async (params: IRequestParams) => {
     setLoading(true);
     try {
       const { data } = await apiService.get<IResponse>(
@@ -52,21 +53,28 @@ function useDepositList(defaultPagination: IPagination) {
     [fetchData]
   );
 
+  const onRefresh = useCallback(() => fetchData({ current, pageSize }), [
+    current,
+    fetchData,
+    pageSize,
+  ]);
+
   useEffect(() => {
-    fetchData(defaultPagination);
-    // ignore defaultPagination changes - we only want to use this once
+    fetchData(defaultParams);
+    // ignore defaultParams changes - we only want to use this once
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData]);
 
   return {
     loading,
     items,
-    onPaginationChange,
     pagination: {
       current,
       pageSize,
       total,
     } as IPagination,
+    onPaginationChange,
+    onRefresh,
   };
 }
 

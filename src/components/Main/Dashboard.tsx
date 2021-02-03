@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { Layout, Typography, Row, Col, Table } from "antd";
 import { TablePaginationConfig } from "antd/lib/table";
@@ -7,7 +7,7 @@ import { turquoise } from "../colors";
 import EmailCard from "./EmailCard";
 import PaymentCard from "./PaymentCard";
 import OperatorAddressCard from "./OperatorAddressCard";
-import { useDepositList } from "../../hooks";
+import { useDepositList, usePrevious } from "../../hooks";
 import { bnToNumber } from "../../utils/bnToNumber";
 import LastSeen from "./LastSeen";
 import FormatAddress from "./FormatAddress";
@@ -15,6 +15,7 @@ import FormatStatus from "./FormatStatus";
 import LotSize from "./LotSize";
 import UserBalance from "./UserBalance";
 import { IPagination } from "../../hooks/useDepositList";
+import { UserContext } from "../../contexts";
 
 const { Title } = Typography;
 
@@ -49,15 +50,32 @@ const columns = [
 ];
 
 function Dashboard() {
-  const { loading, items, pagination, onPaginationChange } = useDepositList({
+  const { user } = useContext(UserContext);
+  const {
+    loading,
+    items,
+    pagination,
+    onPaginationChange,
+    onRefresh,
+  } = useDepositList({
     current: 1,
     pageSize: 10,
-    total: 0,
   });
+  const currentOperator = user?.operatorAddress;
+  const previousOperator = usePrevious(user?.operatorAddress);
 
-  function handleTableChange(newPagination: IPagination) {
-    onPaginationChange(newPagination);
-  }
+  useEffect(() => {
+    if (currentOperator !== previousOperator) {
+      onRefresh();
+    }
+  }, [currentOperator, previousOperator, onRefresh]);
+
+  const handleTableChange = useCallback(
+    (newPagination: IPagination) => {
+      onPaginationChange(newPagination);
+    },
+    [onPaginationChange]
+  );
 
   const paginationConfig: TablePaginationConfig = useMemo(
     () => ({
