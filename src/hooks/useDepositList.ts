@@ -1,9 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 import { apiService } from "../services";
+import usePrevious from "./usePrevious";
 
 export interface IPagination extends IRequestParams {
   total: number;
+}
+
+interface IConfig extends IRequestParams {
+  operatorAddress: string | undefined;
 }
 
 interface IRequestParams {
@@ -24,12 +29,16 @@ interface IResponse {
   total: number;
 }
 
-function useDepositList(defaultParams: IRequestParams) {
+function useDepositList(config: IConfig) {
   const [items, setItems] = useState([] as IDeposit[]);
-  const [pageSize, setPageSize] = useState(defaultParams.pageSize);
-  const [current, setCurrent] = useState(defaultParams.current);
+  const [pageSize, setPageSize] = useState(config.pageSize);
+  const [current, setCurrent] = useState(config.current);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const currentOperator = useMemo(() => config.operatorAddress, [
+    config.operatorAddress,
+  ]);
+  const previousOperator = usePrevious(config.operatorAddress);
 
   const fetchData = useCallback(async (params: IRequestParams) => {
     setLoading(true);
@@ -55,15 +64,21 @@ function useDepositList(defaultParams: IRequestParams) {
 
   const onRefresh = useCallback(() => fetchData({ current, pageSize }), [
     current,
-    fetchData,
     pageSize,
+    fetchData,
   ]);
 
   useEffect(() => {
-    fetchData(defaultParams);
-    // ignore defaultParams changes - we only want to use this once
+    fetchData(config);
+    // ignore config changes - we only want to use this once
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData]);
+
+  useEffect(() => {
+    if (currentOperator !== previousOperator) {
+      onRefresh();
+    }
+  }, [currentOperator, previousOperator, onRefresh]);
 
   return {
     loading,
