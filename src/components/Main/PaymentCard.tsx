@@ -3,14 +3,11 @@ import { InputNumber, Button, Form, notification } from "antd";
 import { ethers } from "ethers";
 import EthForwarder from "keeper-payment-contract/artifacts/EthForwarder.json";
 
-import { CHAIN_ID, MIN_BALANCE_ETH } from "../../env";
+import { CHAIN_ID, MIN_PAYMENT_ETH } from "../../env";
 import mail from "../../img/mail.svg";
 import { EthersContext } from "../../contexts";
 import { numberToBn } from "../../utils";
 import InputCard from "./InputCard";
-
-// arbitrary minimum amount to put in
-const minPaymentAmount = Number(MIN_BALANCE_ETH) * 2;
 
 function PaymentCard() {
   const { provider } = useContext(EthersContext);
@@ -81,13 +78,13 @@ function PaymentCard() {
             },
             {
               type: "number",
-              min: Number(minPaymentAmount),
-              message: `Minimum amount is ${minPaymentAmount}`,
+              min: MIN_PAYMENT_ETH,
+              message: `Minimum amount is ${MIN_PAYMENT_ETH}`,
             },
           ]}
         >
           <InputNumber
-            placeholder={`Min ${minPaymentAmount} ETH`}
+            placeholder={`Min ${MIN_PAYMENT_ETH} ETH`}
             disabled={loading}
           />
         </Form.Item>
