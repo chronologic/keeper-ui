@@ -24,11 +24,11 @@ export default function FormatStatus({ status }: { status: string }) {
               </div>
             );
           case "KEEPER_REDEEMING":
-            return <div>Redeeming</div>;
+            return <div>Redeeming with Keeper</div>;
           case "KEEPER_QUEUED_FOR_REDEMPTION":
             return <div>Queued for redemption</div>;
           default:
-            return <div />;
+            return <div>{status}</div>;
         }
       })()}
     </div>
