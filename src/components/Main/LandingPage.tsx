@@ -36,7 +36,7 @@ function LandingPage() {
               <Link href="https://keep.network/" target="_blank">
                 More about Keep Network
               </Link>
-              <Link href="url" target="_blank">
+              <Link href="https://chat.keep.network/" target="_blank">
                 Join our Discord channel
               </Link>
             </Space>
