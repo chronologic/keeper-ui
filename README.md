@@ -6,6 +6,14 @@ This is a supporting repository for the [Keeper project](https://github.com/chro
 
 This repository holds the UI for Keeper. Created with `create-react-app`.
 
+The UI provides basic features that users need to use the service:
+
+- signing up (via simply signing a message with their wallet)
+- topping up their account with ETH
+- providing Operator address that they want to be protected by the service
+- providing email address for notifications
+- viewing a list of relevant (i.e. redeemable or being processed by the service) deposits for their Operator Node
+
 ## Environment variables
 
 This repo uses [`dotenv`](https://www.npmjs.com/package/dotenv) to load environment variables.
