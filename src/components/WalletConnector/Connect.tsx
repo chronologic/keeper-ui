@@ -5,8 +5,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { Wallet } from "use-wallet";
 
 import metamask from "../../img/metamask.svg";
-import trezor from "../../img/trezor.svg";
-import ledger from "../../img/ledger.svg";
+import walletconnect from "../../img/walletconnect.svg";
 
 interface IProps {
   wallet: Wallet<unknown>;
@@ -16,27 +15,32 @@ function Connect({ wallet }: IProps) {
   const handleConnectMetamask = useCallback(() => wallet.connect("injected"), [
     wallet,
   ]);
+  const handleConnectWalletconnect = useCallback(
+    () => wallet.connect("walletconnect"),
+    [wallet]
+  );
 
   const menu = (
     <Menu>
       <Menu.Item
         key="1"
-        icon={<img src={metamask} className="wallet-icon" alt="metamask" />}
+        icon={<img src={metamask} className="wallet-icon" alt="MetaMask" />}
         onClick={handleConnectMetamask}
       >
         Metamask
       </Menu.Item>
       <Menu.Item
         key="2"
-        icon={<img src={ledger} className="wallet-icon" alt="ledger" />}
+        icon={
+          <img
+            src={walletconnect}
+            className="wallet-icon"
+            alt="WalletConnect"
+          />
+        }
+        onClick={handleConnectWalletconnect}
       >
-        Ledger
-      </Menu.Item>
-      <Menu.Item
-        key="3"
-        icon={<img src={trezor} className="wallet-icon" alt="trezor" />}
-      >
-        Trezor
+        WalletConnect
       </Menu.Item>
     </Menu>
   );

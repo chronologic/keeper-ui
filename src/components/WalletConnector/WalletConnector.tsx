@@ -5,11 +5,15 @@ import { useWallet } from "use-wallet";
 import Connect from "./Connect";
 import Connected from "./Connected";
 
-function WalletConnector() {
+interface IProps {
+  className: string;
+}
+
+function WalletConnector({ className = "" }: Partial<IProps>) {
   const wallet = useWallet();
 
   return (
-    <Container>
+    <Container className={className}>
       {wallet.status === "connected" ? (
         <Connected wallet={wallet} />
       ) : (

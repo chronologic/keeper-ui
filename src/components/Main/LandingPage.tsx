@@ -27,7 +27,7 @@ function LandingPage() {
             <Space direction="horizontal" size={[48, 0]}>
               <ConnectWallet>
                 <Button type="primary">
-                  <WalletConnector />
+                  <WalletConnector className="wallet-connector" />
                 </Button>
               </ConnectWallet>
               <Link href="url" target="_blank">
@@ -58,6 +58,14 @@ const StyledContent = styled.div`
 const ConnectWallet = styled.div`
   display: flex;
   flex-direction: row;
+
+  > .ant-btn {
+    padding: 0;
+  }
+
+  .wallet-connector .ant-dropdown-trigger {
+    padding: 1rem 2.25rem;
+  }
 `;
 
 const HeaderTitle = styled.div`
