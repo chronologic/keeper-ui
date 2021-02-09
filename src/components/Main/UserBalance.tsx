@@ -11,7 +11,7 @@ import { MIN_BALANCE_ETH, WARNING_BALANCE_ETH } from "../../env";
 const { Title } = Typography;
 
 function UserBalance() {
-  const { loading, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const isWarningLevel = useMemo(() => {
     return BigNumber.from(user?.balanceEth || "0").lte(

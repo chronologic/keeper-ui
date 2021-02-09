@@ -30,6 +30,7 @@ function PaymentCard() {
             "Please allow a couple of minutes for the system to update your balance",
         });
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(e);
         notification.error({ message: "Failed to confirm transaction" });
       } finally {
@@ -43,6 +44,7 @@ function PaymentCard() {
     const { ethAmount } = await form.validateFields();
     try {
       const ethForwarderContract = new ethers.Contract(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (EthForwarder.networks as any)[`${CHAIN_ID}`]?.address,
         EthForwarder.abi,
         provider?.getSigner()

@@ -72,6 +72,7 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
           message: "Error",
           description: "Update failed",
         });
+        // eslint-disable-next-line no-console
         console.error(e);
         throw e;
       } finally {

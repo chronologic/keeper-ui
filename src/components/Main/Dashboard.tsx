@@ -104,6 +104,7 @@ function Dashboard() {
             dataSource={items}
             pagination={paginationConfig}
             loading={loading}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={handleTableChange as any}
           />
         </StyledContent>

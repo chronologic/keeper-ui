@@ -43,6 +43,7 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
         setAuthModalOpen(true);
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       removeAuthHeader();
       setAuthModalOpen(true);
@@ -50,6 +51,7 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
   }, [provider]);
 
   const handleSign = useCallback(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const signer = provider!.getSigner();
     try {
       const signature = await signer.signMessage("keeper");
@@ -60,6 +62,7 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
       setAuthModalOpen(false);
       notification.success({ message: "Signature successful" });
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
       notification.error({ message: "Signature failed" });
     }
@@ -78,6 +81,7 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
       undefined,
       (res: AxiosError) => {
         if (res?.response?.status === 401) {
+          // eslint-disable-next-line no-console
           console.warn("User unauthorized");
           removeAuthHeader();
           setAuthenticated(true);

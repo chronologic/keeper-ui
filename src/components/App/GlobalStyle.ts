@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { black, darkgray, purple, turquoise } from "../colors";
+import { black, purple, turquoise } from "../colors";
 
 const Style = createGlobalStyle`
   * {
