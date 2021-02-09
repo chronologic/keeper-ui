@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import { getAuthHeader } from "../contexts/Auth/Auth";
 import { API_URL } from "../env";
+import { getAuthHeader } from "../utils";
 
 const api = axios.create({
   baseURL: API_URL,

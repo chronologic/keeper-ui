@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import { EthersContext } from "../Ethers";
 import { apiService } from "../../services";
 import { purple } from "../../components/colors";
+import { getAuthHeader, removeAuthHeader, setAuthHeader } from "../../utils";
 
 interface IAuthContext {
   authenticated: boolean;
@@ -112,19 +113,5 @@ const MessageToSign = styled.div`
   font-size: 24px;
   color: ${purple};
 `;
-
-const authStorageKey = "auth";
-export function getAuthHeader(): string {
-  return localStorage.getItem(authStorageKey) || "";
-}
-
-export function setAuthHeader(address: string, signature: string): void {
-  const header = btoa(`${address.toLowerCase()}:${signature.toLowerCase()}`);
-  localStorage.setItem(authStorageKey, header);
-}
-
-export function removeAuthHeader(): void {
-  localStorage.removeItem(authStorageKey);
-}
 
 export default AuthProvider;
