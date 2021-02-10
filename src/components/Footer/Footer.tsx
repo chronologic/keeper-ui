@@ -47,7 +47,11 @@ function Footer() {
         </Col>
         <Col className="gutter-row" span={6}>
           <Space direction="vertical">
-            <Link className="footer-link" href="url" target="_blank">
+            <Link
+              className="footer-link"
+              href="https://blog.chronologic.network/chronologic-is-awarded-grant-from-keep-network-7c3d0e36a4be"
+              target="_blank"
+            >
               What is Keeper?
             </Link>
             <Link

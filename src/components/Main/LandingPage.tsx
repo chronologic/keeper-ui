@@ -30,7 +30,10 @@ function LandingPage() {
                   <WalletConnector className="wallet-connector" />
                 </Button>
               </ConnectWallet>
-              <Link href="url" target="_blank">
+              <Link
+                href="https://blog.chronologic.network/chronologic-is-awarded-grant-from-keep-network-7c3d0e36a4be"
+                target="_blank"
+              >
                 What is Keeper?
               </Link>
               <Link href="https://keep.network/" target="_blank">

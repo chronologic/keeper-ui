@@ -33,7 +33,11 @@ function Sidebar() {
           key="3"
           icon={<img src={discord} className="menu-icon" alt="discord" />}
         >
-          <Link className="menu-link" href="url" target="_blank">
+          <Link
+            className="menu-link"
+            href="https://chat.keep.network/"
+            target="_blank"
+          >
             Discord
           </Link>
         </Menu.Item>
