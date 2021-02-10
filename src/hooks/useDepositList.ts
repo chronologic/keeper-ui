@@ -1,5 +1,7 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useContext } from "react";
 
+import { MINUTE_MILLIS } from "../constants";
+import { AuthContext } from "../contexts";
 import { apiService } from "../services";
 import usePrevious from "./usePrevious";
 
@@ -30,6 +32,7 @@ interface IResponse {
 }
 
 function useDepositList(config: IConfig) {
+  const { authenticated } = useContext(AuthContext);
   const [items, setItems] = useState([] as IDeposit[]);
   const [pageSize, setPageSize] = useState(config.pageSize);
   const [current, setCurrent] = useState(config.current);
@@ -40,18 +43,23 @@ function useDepositList(config: IConfig) {
   ]);
   const previousOperator = usePrevious(config.operatorAddress);
 
-  const fetchData = useCallback(async (params: IRequestParams) => {
-    setLoading(true);
-    try {
-      const { data } = await apiService.get<IResponse>(
-        `/deposits?page=${params.current}&limit=${params.pageSize}`
-      );
-      setItems(data.items);
-      setTotal(data.total);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const fetchData = useCallback(
+    async (params: IRequestParams) => {
+      if (authenticated) {
+        setLoading(true);
+        try {
+          const { data } = await apiService.get<IResponse>(
+            `/deposits?page=${params.current}&limit=${params.pageSize}`
+          );
+          setItems(data.items);
+          setTotal(data.total);
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    [authenticated]
+  );
 
   const onPaginationChange = useCallback(
     async (newPagination: IPagination) => {
@@ -79,6 +87,18 @@ function useDepositList(config: IConfig) {
       onRefresh();
     }
   }, [currentOperator, previousOperator, onRefresh]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        onRefresh();
+      }
+    }, 3 * MINUTE_MILLIS);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [onRefresh]);
 
   return {
     loading,

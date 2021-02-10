@@ -11,6 +11,7 @@ import { apiService } from "../../services";
 import { IUser } from "../../types";
 import { EthersContext } from "../Ethers";
 import { AuthContext } from "../Auth";
+import { MINUTE_MILLIS } from "../../constants";
 
 type UserPartial = Partial<Pick<IUser, "email" | "operatorAddress">>;
 
@@ -86,6 +87,23 @@ const UserProvider: React.FC<IProps> = ({ children }: IProps) => {
     if (authenticated && provider) {
       loadUser();
     }
+  }, [authenticated, loadUser, provider]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (authenticated && provider) {
+      interval = setInterval(() => {
+        if (document.visibilityState === "visible") {
+          loadUser();
+        }
+      }, MINUTE_MILLIS);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
   }, [authenticated, loadUser, provider]);
 
   return (

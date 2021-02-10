@@ -37,12 +37,17 @@ function UserBalance() {
 
   const message = useMemo(() => {
     if (isCriticalLevel) {
-      return "ETH level too low! Your node is not being protected!";
+      return (
+        <span>
+          ETH level too low!
+          <br /> Your node is not protected!
+        </span>
+      );
     }
     if (isWarningLevel) {
       return "You’re running out of ETH";
     }
-    return "Your node is being protected.";
+    return "Your node is protected!";
   }, [isCriticalLevel, isWarningLevel]);
 
   const percent = useMemo(() => {

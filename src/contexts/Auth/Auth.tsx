@@ -36,9 +36,10 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
     const account = await provider?.getSigner().getAddress();
     try {
       const [address] = atob(header).split(":");
-      if (address === account?.toLowerCase()) {
+      if (address && address === account?.toLowerCase()) {
         setAuthenticated(true);
       } else {
+        setAuthenticated(false);
         removeAuthHeader();
         setAuthModalOpen(true);
       }
@@ -84,7 +85,7 @@ const AuthProvider: React.FC<IProps> = ({ children }: IProps) => {
           // eslint-disable-next-line no-console
           console.warn("User unauthorized");
           removeAuthHeader();
-          setAuthenticated(true);
+          setAuthenticated(false);
           setAuthModalOpen(true);
         }
         return res;

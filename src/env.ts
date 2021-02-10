@@ -5,6 +5,4 @@ export const MIN_BALANCE_ETH = Number(process.env.REACT_APP_MIN_BALANCE_ETH);
 export const WARNING_BALANCE_ETH = Number(
   process.env.REACT_APP_WARNING_BALANCE_ETH
 );
-export const MIN_PAYMENT_ETH = Number(
-  process.env.REACT_APP_REACT_APP_MIN_PAYMENT_ETH
-);
+export const MIN_PAYMENT_ETH = Number(process.env.REACT_APP_MIN_PAYMENT_ETH);
