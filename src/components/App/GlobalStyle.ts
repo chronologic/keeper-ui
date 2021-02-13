@@ -159,7 +159,7 @@ const Style = createGlobalStyle`
   }
   .table-icon {
     max-width: 18px;
-    margin: 0 8px;
+    margin-right: 8px;
   }
   .table-active {
     color: ${turquoise};
