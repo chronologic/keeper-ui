@@ -30,7 +30,9 @@ An `.env` file should be created based on the `.env.example` template file. The 
 
 ## Deployment
 
-You may deploy this repo to e.g. https://www.netlify.com/
+You may deploy this repo to e.g. https://www.netlify.com/.
+
+Detailed deployment instructions can be found [here](https://docs.netlify.com/).
 
 ## Building
 
