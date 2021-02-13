@@ -69,6 +69,7 @@ function Dashboard() {
       ...pagination,
       pageSizeOptions: ["10", "25", "50", "100"],
       showSizeChanger: true,
+      showTotal: (total, [from, to]) => `${from}-${to} of ${total}`,
     }),
     [pagination]
   );
