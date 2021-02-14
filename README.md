@@ -20,13 +20,13 @@ This repo uses [`dotenv`](https://www.npmjs.com/package/dotenv) to load environm
 
 A `.env` file should be created based on the `.env.example` template file. The `.env` file should never be commited.
 
-| Name                            | Type     | Default                 | Description                                                                                                                       |
-| ------------------------------- | -------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `REACT_APP_CHAIN_ID`            | `number` | `1`                     | Ethereum chain id; 1 - mainnet / 3 - ropsten / ...                                                                                |
-| `REACT_APP_API_URL`             | `string` | `http://localhost:3001` | URL of the REST API                                                                                                               |
-| `REACT_APP_MIN_BALANCE_ETH`     | `number` | `0.5`                   | User minimum account balance (below this their deposits will not be protected); This should match the value in `keeper-service`   |
-| `REACT_APP_WARNING_BALANCE_ETH` | `number` | `0.75`                  | User warning account balance (below this notifications will be sent to the user); This should match the value in `keeper-service` |
-| `REACT_APP_MIN_PAYMENT_ETH`     | `number` | `1`                     | Minimum amount of ETH that user can deposit into their account                                                                    |
+| Name                            | Type     | Default                 | Description                                                                                                                        |
+| ------------------------------- | -------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `REACT_APP_CHAIN_ID`            | `number` | `1`                     | Ethereum chain id; 1 - mainnet / 3 - ropsten / ...                                                                                 |
+| `REACT_APP_API_URL`             | `string` | `http://localhost:3001` | URL of the REST API.                                                                                                               |
+| `REACT_APP_MIN_BALANCE_ETH`     | `number` | `0.5`                   | User minimum account balance (below this their deposits will not be protected). This should match the value in `keeper-service`.   |
+| `REACT_APP_WARNING_BALANCE_ETH` | `number` | `0.75`                  | User warning account balance (below this notifications will be sent to the user). This should match the value in `keeper-service`. |
+| `REACT_APP_MIN_PAYMENT_ETH`     | `number` | `1`                     | Minimum amount of ETH that a user can deposit into their account.                                                                  |
 
 ## Deployment
 
