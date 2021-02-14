@@ -18,7 +18,7 @@ The UI provides basic features that users need to use the service:
 
 This repo uses [`dotenv`](https://www.npmjs.com/package/dotenv) to load environment variables.
 
-An `.env` file should be created based on the `.env.example` template file. The `.env` file should never be commited.
+A `.env` file should be created based on the `.env.example` template file. The `.env` file should never be commited.
 
 | Name                            | Type     | Default                 | Description                                                                                                                       |
 | ------------------------------- | -------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
