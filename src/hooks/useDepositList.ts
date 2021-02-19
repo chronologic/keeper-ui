@@ -93,7 +93,7 @@ function useDepositList(config: IConfig) {
       if (document.visibilityState === "visible") {
         onRefresh();
       }
-    }, 3 * MINUTE_MILLIS);
+    }, MINUTE_MILLIS);
 
     return () => {
       clearInterval(interval);
