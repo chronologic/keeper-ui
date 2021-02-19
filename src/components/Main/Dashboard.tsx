@@ -99,6 +99,13 @@ function Dashboard() {
           </Row>
         </StyledContent>
         <StyledContent>
+          <i>
+            Note: only deposits relevant to the service are shown here - i.e.
+            only deposits that can be redeemed and that are deemed less costly
+            to redeem than to get liquidated
+          </i>
+          <br />
+          <br />
           <Table
             rowKey="depositAddress"
             columns={columns}
