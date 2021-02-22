@@ -14,7 +14,7 @@ The UI provides basic features that users need to use the service:
 - providing email address for notifications
 - viewing a list of relevant (i.e. redeemable or being processed by the service) deposits for their Operator Node
 
-## Environment variables
+## :wrench: Environment variables
 
 This repo uses [`dotenv`](https://www.npmjs.com/package/dotenv) to load environment variables.
 
@@ -28,13 +28,13 @@ A `.env` file should be created based on the `.env.example` template file. The `
 | `REACT_APP_WARNING_BALANCE_ETH` | `number` | `0.75`                  | User warning account balance (below this notifications will be sent to the user). This should match the value in `keeper-service`. |
 | `REACT_APP_MIN_PAYMENT_ETH`     | `number` | `1`                     | Minimum amount of ETH that a user can deposit into their account.                                                                  |
 
-## Deployment
+## :rocket: Deployment
 
 You may deploy this repo to e.g. https://www.netlify.com/.
 
 Detailed deployment instructions can be found [here](https://docs.netlify.com/).
 
-## Building
+## :construction: Building
 
 Run `npm run build`.
 
