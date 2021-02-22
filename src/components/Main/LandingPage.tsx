@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Layout, Typography, Space, Button } from "antd";
+import ReactPlayer from "react-player";
 import { turquoise } from "../colors";
 import WalletConnector from "../WalletConnector";
 
@@ -44,6 +45,10 @@ function LandingPage() {
               </Link>
             </Space>
           </ConnectFooter>
+        </StyledContent>
+        <StyledContent>
+          <Title level={3}>Watch Demo</Title>
+          <ReactPlayer url="https://vimeo.com/510148877" controls />
         </StyledContent>
       </Main>
     </Layout>
