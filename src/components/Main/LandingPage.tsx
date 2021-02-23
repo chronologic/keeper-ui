@@ -47,8 +47,10 @@ function LandingPage() {
           </ConnectFooter>
         </StyledContent>
         <StyledContent>
-          <Title level={3}>Watch Demo</Title>
-          <ReactPlayer url="https://vimeo.com/510148877" controls />
+          <Space direction="vertical" size={[24, 0]}>
+            <Title level={3}>Watch Demo</Title>
+            <ReactPlayer url="https://vimeo.com/510148877" controls />
+          </Space>
         </StyledContent>
       </Main>
     </Layout>

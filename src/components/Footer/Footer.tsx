@@ -61,6 +61,13 @@ function Footer() {
             >
               Chronos &amp; other dApps
             </Link>
+            <Link
+              className="footer-link"
+              href="https://github.com/chronologic/keeper-service"
+              target="_blank"
+            >
+              Github
+            </Link>
           </Space>
         </Col>
         <Col className="gutter-row" span={6}>
