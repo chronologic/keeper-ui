@@ -11,8 +11,11 @@ function ConnectionStatus() {
       case "injected": {
         return "MetaMask";
       }
+      case "walletconnect": {
+        return "WalletConnect";
+      }
       default: {
-        return "";
+        return wallet.connector;
       }
     }
   }, [wallet.connector]);

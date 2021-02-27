@@ -12,12 +12,24 @@ interface IProps {
 }
 
 function Connect({ wallet }: IProps) {
-  const handleConnectMetamask = useCallback(() => wallet.connect("injected"), [
-    wallet,
-  ]);
-  const handleConnectWalletconnect = useCallback(
-    () => wallet.connect("walletconnect"),
+  const handleConnect = useCallback(
+    (walletType: string) => {
+      try {
+        wallet.reset();
+        localStorage.removeItem("walletconnect");
+      } finally {
+        wallet.connect(walletType as any);
+      }
+    },
     [wallet]
+  );
+
+  const handleConnectMetamask = useCallback(() => {
+    handleConnect("injected");
+  }, [handleConnect]);
+  const handleConnectWalletconnect = useCallback(
+    () => handleConnect("walletconnect"),
+    [handleConnect]
   );
 
   const menu = (
