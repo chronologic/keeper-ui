@@ -9,6 +9,18 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Main from "../Main";
 import Footer from "../Footer";
+import { CHAIN_ID } from "../../env";
+
+function getChainName() {
+  switch (CHAIN_ID) {
+    case 3: {
+      return "ropsten";
+    }
+    default: {
+      return CHAIN_ID;
+    }
+  }
+}
 
 function App() {
   return (
@@ -16,6 +28,11 @@ function App() {
       <StyledApp>
         <GlobalStyle />
         <AntLayout className="layout">
+          {CHAIN_ID !== 1 && (
+            <NonMainnetWarning>
+              Current network: {getChainName()}
+            </NonMainnetWarning>
+          )}
           <Header />
           <AntLayout>
             <Sidebar />
@@ -27,6 +44,15 @@ function App() {
     </Providers>
   );
 }
+
+const NonMainnetWarning = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  line-height: normal;
+  padding: 8px 16px;
+  background-color: orange;
+`;
 
 const StyledApp = styled.div`
   .layout {
