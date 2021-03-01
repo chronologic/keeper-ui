@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import EthForwarder from "keeper-payment-contract/artifacts/EthForwarder.json";
 
 import { CHAIN_ID, MIN_PAYMENT_ETH } from "../../env";
-import mail from "../../img/mail.svg";
+import eth from "../../img/eth.svg";
 import { EthersContext } from "../../contexts";
 import { numberToBn } from "../../utils";
 import InputCard from "./InputCard";
@@ -66,7 +66,7 @@ function PaymentCard() {
 
   return (
     <InputCard
-      icon={<img src={mail} className="circle-icon" alt="mail" />}
+      icon={<img src={eth} className="circle-icon" alt="eth" />}
       title="Provide payment"
     >
       <Form form={form} name="paymentForm">
