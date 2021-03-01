@@ -18,6 +18,7 @@ function Connect({ wallet }: IProps) {
         wallet.reset();
         localStorage.removeItem("walletconnect");
       } finally {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         wallet.connect(walletType as any);
       }
     },
