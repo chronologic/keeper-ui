@@ -22,7 +22,7 @@ const EthersProvider: React.FC<IProps> = ({ children }: IProps) => {
   ] = useState<ethers.providers.Web3Provider | null>(null);
 
   useEffect(() => {
-    if (wallet.status === "connected") {
+    if (wallet.status === "connected" && wallet.ethereum) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setProvider(new ethers.providers.Web3Provider(wallet.ethereum as any));
     }
