@@ -1,6 +1,8 @@
 # keeper-ui
 
 This is a supporting repository for the [Keeper project](https://github.com/chronologic/keeper-service).
+\
+🗞 https://twitter.com/keep_project/status/1389704394833219585
 
 ## Repository overview
 
